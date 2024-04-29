@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.sysuser.domain;
+package cc.nihilism.app.autolink.filemonitor.domain;
 
 import cc.nihilism.app.basic.BaseDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,22 +9,19 @@ import lombok.EqualsAndHashCode;
 import java.util.Date;
 
 @Entity
-@Table(name = "sys_user")
+@Table(name = "file_observe")
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysUser extends BaseDomain {
+public class FileObserve extends BaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 64)
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String filePath;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false, length = 16)
-    private String salt;
+    private String linkPath;
 
     @Column(nullable = false, length = 1, columnDefinition = "CHAR(1) DEFAULT '1'")
     private String status;
@@ -42,4 +39,5 @@ public class SysUser extends BaseDomain {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createTime;
+
 }
