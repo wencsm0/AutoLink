@@ -1,4 +1,4 @@
-package cc.nihilism.app.basic.utils;
+package cc.nihilism.app.autolink.basic.utils;
 
 import lombok.Getter;
 

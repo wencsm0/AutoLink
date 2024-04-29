@@ -1,0 +1,18 @@
+version: "3"
+services:
+  auto-link:
+    image: amazoncorretto:21
+    container_name: auto-link
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Etc/UTC
+    volumes:
+      - /share/Public/Config/auto-link:/config
+      - /share/Downloads:/downloads
+      - /share/KeepTorrent:/data/keep
+    ports:
+      - 10004:8082
+    restart: always
+
+    entrypoint: java -server -jar -Dloader.path=/config/lib -Dserver.port=8082 /config/AutoLink.jar

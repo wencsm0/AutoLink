@@ -1,4 +1,4 @@
-package cc.nihilism.app.basic;
+package cc.nihilism.app.autolink.basic;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;

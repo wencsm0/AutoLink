@@ -1,6 +1,6 @@
 package cc.nihilism.app.autolink.filemonitor.domain;
 
-import cc.nihilism.app.basic.BaseDomain;
+import cc.nihilism.app.autolink.basic.BaseDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;

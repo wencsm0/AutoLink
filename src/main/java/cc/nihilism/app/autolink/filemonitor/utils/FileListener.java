@@ -20,7 +20,8 @@ public class FileListener extends FileAlterationListenerAdaptor {
     private String getTargetPath(File file) {
         final String parentPath = FileMonitor.getPath(file.getAbsolutePath());
         FileObserve observe = fileObserveService.getByFilePath(parentPath);
-        if (observe == null || StrUtil.isEmpty(observe.getFilePath()) || StrUtil.isEmpty(observe.getLinkPath())) {
+        if (observe == null || StrUtil.isEmpty(observe.getFilePath()) || StrUtil.isEmpty(observe.getLinkPath())
+                || file.getAbsolutePath().contains(".DS_Store")) {
             return null;
         }
 
@@ -71,7 +72,7 @@ public class FileListener extends FileAlterationListenerAdaptor {
 
     @Override
     public void onFileCreate(File file) {
-        if (!file.canRead()) {
+        if (!file.canRead() || file.isDirectory() || file.getAbsolutePath().contains(".DS_Store")) {
             return;
         }
 
@@ -82,6 +83,8 @@ public class FileListener extends FileAlterationListenerAdaptor {
 
         final String sourcePath = file.getAbsolutePath();
         try {
+            Path target = Path.of(targetPath);
+            Files.deleteIfExists(target);
             Files.createLink(Path.of(targetPath), Path.of(sourcePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -98,7 +101,7 @@ public class FileListener extends FileAlterationListenerAdaptor {
     public void onFileDelete(File file) {
         log.info("删除：{}", file.getAbsolutePath());
         final String targetPath = getTargetPath(file);
-        if (StrUtil.isEmpty(targetPath)) {
+        if (StrUtil.isEmpty(targetPath) || file.isDirectory() || file.getAbsolutePath().contains(".DS_Store")) {
             return;
         }
 

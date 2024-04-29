@@ -1,8 +1,8 @@
 package cc.nihilism.app.autolink.controller;
 
+import cc.nihilism.app.autolink.basic.HttpResult;
 import cc.nihilism.app.autolink.sysuser.domain.SysUser;
 import cc.nihilism.app.autolink.sysuser.mapper.SysUserMapper;
-import cc.nihilism.app.basic.HttpResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

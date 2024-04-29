@@ -1,8 +1,8 @@
 package cc.nihilism.app.autolink.controller;
 
+import cc.nihilism.app.autolink.basic.HttpResult;
 import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
 import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
-import cc.nihilism.app.basic.HttpResult;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.bind.annotation.*;
@@ -71,7 +71,7 @@ public class FileObserveController {
         final String seasonStr = "S" + String.format("%02d", season);
 
         List<String> res = new ArrayList<>();
-        Map<String, List<File>> map = Arrays.stream(files).collect(Collectors.groupingBy(e -> FilenameUtils.getExtension(e.getPath())));
+        Map<String, List<File>> map = Arrays.stream(files).filter(File::isFile).collect(Collectors.groupingBy(e -> FilenameUtils.getExtension(e.getPath())));
         map.forEach((k, v) -> {
             int count = 1;
             for (File file : v) {
@@ -87,7 +87,10 @@ public class FileObserveController {
                 res.add(targetName);
 
                 try {
-                    FileUtils.moveFile(file, new File(targetName));
+                    File target = new File(targetName);
+                    if (!target.exists()) {
+                        FileUtils.moveFile(file, new File(targetName));
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

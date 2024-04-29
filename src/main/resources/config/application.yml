@@ -2,8 +2,10 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: AutoLink
   datasource:
-    url: "jdbc:sqlite:resources/auto_link.db"
+    url: jdbc:sqlite:/config/auto_link.db
     driver-class-name: org.sqlite.JDBC
   jpa:
     show-sql: true

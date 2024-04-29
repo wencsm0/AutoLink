@@ -1,4 +1,4 @@
-package cc.nihilism.app.basic;
+package cc.nihilism.app.autolink.basic;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

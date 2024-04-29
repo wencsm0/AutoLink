@@ -1,7 +1,7 @@
 package cc.nihilism.app.autolink.filemonitor.utils;
 
-import cc.nihilism.app.basic.utils.TrieNode;
-import cc.nihilism.app.basic.utils.TrieTree;
+import cc.nihilism.app.autolink.basic.utils.TrieNode;
+import cc.nihilism.app.autolink.basic.utils.TrieTree;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
 import org.springframework.stereotype.Component;
