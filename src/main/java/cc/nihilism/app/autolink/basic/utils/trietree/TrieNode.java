@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.basic.utils;
+package cc.nihilism.app.autolink.basic.utils.trietree;
 
 import lombok.Getter;
 

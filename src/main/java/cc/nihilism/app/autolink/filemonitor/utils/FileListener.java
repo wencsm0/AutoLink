@@ -1,12 +1,12 @@
 package cc.nihilism.app.autolink.filemonitor.utils;
 
+import cc.nihilism.app.autolink.basic.utils.StrUtil;
 import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
 import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
-import org.dromara.hutool.core.text.StrUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,7 +85,7 @@ public class FileListener extends FileAlterationListenerAdaptor {
         try {
             Path target = Path.of(targetPath);
             Files.deleteIfExists(target);
-            Files.createLink(Path.of(targetPath), Path.of(sourcePath));
+            Files.createLink(target, Path.of(sourcePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.basic.utils;
+package cc.nihilism.app.autolink.basic.utils.trietree;
 
 public class TrieTree<T> {
     private final TrieNode<T> root;

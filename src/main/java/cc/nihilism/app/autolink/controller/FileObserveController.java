@@ -1,6 +1,7 @@
 package cc.nihilism.app.autolink.controller;
 
 import cc.nihilism.app.autolink.basic.HttpResult;
+import cc.nihilism.app.autolink.basic.utils.StrUtil;
 import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
 import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
 import org.apache.commons.io.FileUtils;
@@ -48,6 +49,31 @@ public class FileObserveController {
         return HttpResult.success();
     }
 
+    public static String replaceFileName(String targetName, int year, String season, String episode) {
+        // 替换[01]格式的剧集命名为' <year> E<season>S<index> '
+        targetName = targetName.replaceAll("\\[\\d+]", " " + year + " " + season + episode + " ");
+
+        // 全角转半角
+        targetName = StrUtil.toDBC(targetName);
+
+        // 去除多余空格
+        targetName = targetName.replaceAll(" +", " ");
+        targetName = targetName.replaceAll("(?<![a-zA-Z0-9]) | (?![a-zA-Z0-9])", "");
+        targetName = StrUtil.trim(targetName);
+
+        // 空格转'.'
+        targetName = targetName.replaceAll("(?<!]) (?!\\[)", ".");
+        return targetName;
+    }
+
+    public static void main(String[] args) {
+        String targetName = "[UHA-WINGS&VCB-Studio] Kaguya-sama wa Kokurasetai꞉ Tensai-tachi no Renai Zunousen [01][Ma10p_1080p][x265_flac]";
+
+        // 输出结果
+        // [UHA-WINGS&VCB-Studio]Kaguya-sama.wa.Kokurasetai꞉Tensai-tachi.no.Renai.Zunousen.2019.E01S01[Ma10p_1080p][x265_flac]
+        System.out.println(replaceFileName(targetName, 2019, "E01", "S01"));
+    }
+
     @PostMapping("/rename-ma10p")
     public HttpResult renameMa10p(String targetPath, int year, int season) {
         File directory = new File(targetPath);
@@ -75,15 +101,14 @@ public class FileObserveController {
         map.forEach((k, v) -> {
             int count = 1;
             for (File file : v) {
-                String index = "E" + String.format("%02d", count++);
+                String episodeStr = "E" + String.format("%02d", count++);
                 String targetName = file.getName();
-                targetName = targetName.replaceAll("\\[\\d{1,3}].?\\[Ma10p", " " + year + " " + seasonStr + index + " " + "[Ma10p");
-                targetName = targetName.replace("  ", " ");
-                targetName = targetName.replaceAll(" *： *", ":");
-                targetName = targetName.replaceAll(" *꞉ *", ":");
-                targetName = targetName.replaceAll("(?<!]) ", ".");
-                targetName = "/" + FilenameUtils.getPath(file.getAbsolutePath()) + targetName;
 
+                // 转换文件名
+                targetName = replaceFileName(targetName, year, seasonStr, episodeStr);
+
+                // 输出结果
+                targetName = "/" + FilenameUtils.getPath(file.getAbsolutePath()) + targetName;
                 res.add(targetName);
 
                 try {
