@@ -41,10 +41,9 @@ public class FileObserveController {
         return HttpResult.success();
     }
 
-    @PostMapping("/rename-ma10p")
-    public HttpResult renameMa10p(String targetPath, int year, int season) {
-        FormatFileNameUtil util = new FormatFileNameUtil(FormatFileNameUtil::format1);
-        List<String> res = util.format(targetPath, year, season);
+    @PostMapping("/rename")
+    public HttpResult renameMa10p(String targetPath, String fileName, int year, int season, String prefix, String suffix) {
+        List<String> res = FormatFileNameUtil.rename(targetPath, fileName, year, season, prefix, suffix);
 
         return HttpResult.data(res);
     }
