@@ -3,18 +3,10 @@ package cc.nihilism.app.autolink.controller;
 import cc.nihilism.app.autolink.basic.HttpResult;
 import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
 import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
-import cc.nihilism.app.autolink.filemonitor.utils.FormatFileName;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
+import cc.nihilism.app.autolink.filemonitor.utils.FormatFileNameUtil;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/file-observe")
@@ -51,48 +43,8 @@ public class FileObserveController {
 
     @PostMapping("/rename-ma10p")
     public HttpResult renameMa10p(String targetPath, int year, int season) {
-        File directory = new File(targetPath);
-        File[] files = directory.listFiles();
-
-        if (!directory.exists() || !directory.isDirectory() || files == null) {
-            return HttpResult.error("目标文件夹不存在");
-        }
-
-        Arrays.sort(files, (o1, o2) -> {
-            String o1Suffix = FilenameUtils.getExtension(o1.getPath());
-            String o2Suffix = FilenameUtils.getExtension(o2.getPath());
-            int suffixCompare = o1Suffix.compareTo(o2Suffix);
-            if (0 == suffixCompare) {
-                return o1.getName().compareTo(o2.getName());
-            }
-
-            return suffixCompare;
-        });
-
-        List<String> res = new ArrayList<>();
-        Map<String, List<File>> map = Arrays.stream(files).filter(File::isFile).collect(Collectors.groupingBy(e -> FilenameUtils.getExtension(e.getPath())));
-        map.forEach((k, v) -> {
-            int count = 1;
-            for (File file : v) {
-                String targetName = file.getName();
-
-                // 转换文件名
-                targetName = FormatFileName.format1(targetName, year, season, count++);
-
-                // 输出结果
-                targetName = "/" + FilenameUtils.getPath(file.getAbsolutePath()) + targetName;
-                res.add(targetName);
-
-                try {
-                    File target = new File(targetName);
-                    if (!target.exists()) {
-                        FileUtils.moveFile(file, new File(targetName));
-                    }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+        FormatFileNameUtil util = new FormatFileNameUtil(FormatFileNameUtil::format1);
+        List<String> res = util.format(targetPath, year, season);
 
         return HttpResult.data(res);
     }
