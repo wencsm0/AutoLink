@@ -49,7 +49,6 @@ public class FileObserveController {
         return HttpResult.success();
     }
 
-
     @PostMapping("/rename-ma10p")
     public HttpResult renameMa10p(String targetPath, int year, int season) {
         File directory = new File(targetPath);
