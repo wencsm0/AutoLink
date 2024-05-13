@@ -1,8 +1,8 @@
-package cc.nihilism.app.autolink.filemonitor.utils;
+package cc.nihilism.app.autolink.service.filemonitor.utils;
 
 import cc.nihilism.app.autolink.basic.utils.StrUtil;
-import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
-import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
+import cc.nihilism.app.autolink.service.filemonitor.domain.FileObserve;
+import cc.nihilism.app.autolink.service.filemonitor.service.FileObserveService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;

@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.filemonitor.utils;
+package cc.nihilism.app.autolink.service.filemonitor.utils;
 
 import cc.nihilism.app.autolink.basic.exception.ServiceException;
 import cc.nihilism.app.autolink.basic.utils.StrUtil;

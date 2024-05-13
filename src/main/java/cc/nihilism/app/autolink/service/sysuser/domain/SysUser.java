@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.sysuser.domain;
+package cc.nihilism.app.autolink.service.sysuser.domain;
 
 import cc.nihilism.app.autolink.basic.BaseDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;

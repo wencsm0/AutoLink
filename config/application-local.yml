@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: AutoLink
+  datasource:
+    url: jdbc:sqlite:auto_link.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    enabled: true
+    encoding: utf-8  #编码
+    prefix: classpath:/templates/  #前缀
+    cache: false # 开发时关闭缓存，不然看不到实时页面

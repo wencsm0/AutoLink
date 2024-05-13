@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.filemonitor.utils;
+package cc.nihilism.app.autolink.service.filemonitor.utils;
 
 import cc.nihilism.app.autolink.basic.utils.trietree.TrieNode;
 import cc.nihilism.app.autolink.basic.utils.trietree.TrieTree;

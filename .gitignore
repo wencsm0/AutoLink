@@ -33,3 +33,4 @@ build/
 .vscode/
 /.mvn/
 /resources/auto_link.db
+/auto_link.db

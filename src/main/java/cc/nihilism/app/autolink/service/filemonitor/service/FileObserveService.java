@@ -1,8 +1,8 @@
-package cc.nihilism.app.autolink.filemonitor.service;
+package cc.nihilism.app.autolink.service.filemonitor.service;
 
-import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
-import cc.nihilism.app.autolink.filemonitor.mapper.FileObserveMapper;
-import cc.nihilism.app.autolink.filemonitor.utils.FileMonitor;
+import cc.nihilism.app.autolink.service.filemonitor.domain.FileObserve;
+import cc.nihilism.app.autolink.service.filemonitor.mapper.FileObserveMapper;
+import cc.nihilism.app.autolink.service.filemonitor.utils.FileMonitor;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.stereotype.Service;

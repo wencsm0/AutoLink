@@ -12,3 +12,7 @@ spring:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
     hibernate:
       ddl-auto: update
+  thymeleaf:
+    enabled: true
+    encoding: utf-8  #编码
+    prefix: classpath:/templates/  #前缀

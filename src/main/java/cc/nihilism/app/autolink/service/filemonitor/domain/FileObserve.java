@@ -1,4 +1,4 @@
-package cc.nihilism.app.autolink.filemonitor.domain;
+package cc.nihilism.app.autolink.service.filemonitor.domain;
 
 import cc.nihilism.app.autolink.basic.BaseDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;

@@ -1,9 +1,9 @@
-package cc.nihilism.app.autolink.controller;
+package cc.nihilism.app.autolink.service.filemonitor.controller;
 
 import cc.nihilism.app.autolink.basic.HttpResult;
-import cc.nihilism.app.autolink.filemonitor.domain.FileObserve;
-import cc.nihilism.app.autolink.filemonitor.service.FileObserveService;
-import cc.nihilism.app.autolink.filemonitor.utils.FormatFileNameUtil;
+import cc.nihilism.app.autolink.service.filemonitor.domain.FileObserve;
+import cc.nihilism.app.autolink.service.filemonitor.service.FileObserveService;
+import cc.nihilism.app.autolink.service.filemonitor.utils.FormatFileNameUtil;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
