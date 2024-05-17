@@ -48,7 +48,7 @@ public class FormatFileNameUtil {
         map.forEach((k, v) -> {
             int count = 1;
             for (File file : v) {
-                String extName = FilenameUtils.getExtension(file.getPath());
+                String extName = getFileExtension(file);
 
                 // 转换文件名
                 String targetName = format(fileName, year, season, count, prefix, suffix);
@@ -125,7 +125,7 @@ public class FormatFileNameUtil {
         map.forEach((k, v) -> {
             int count = 1;
             for (File file : v) {
-                String extName = FilenameUtils.getExtension(file.getPath());
+                String extName = getFileExtension(file);
 
                 // 转换文件名
                 String targetName = format(fileName, year, season, count, prefix, suffix);
